@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Product Categories</title>
+    <style>
+        * {
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .products {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+        }
+
+        .section_title h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .single_product {
+            transition: transform 0.3s;
+            border-radius: 5px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px; /* Space between blocks */
+        }
+
+        .single_product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product_img img {
+            width: 100%;
+            height: 200px; /* Set a fixed height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .new_product .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+
+        .product-caption {
+            padding: 20px;
+        }
+
+        .product-ratting {
+            color: #f39c12; /* Star color */
+        }
+
+        .product-ratting i {
+            margin-right: 2px;
+        }
+
+        .product-caption h4 {
+            font-size: 1.25rem;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #28a745; /* Price color */
+        }
+
+        .category {
+            position: relative; /* Required for positioning the text */
+            overflow: hidden; /* Ensures that the text does not overflow */
+            height: 200px; /* Set a fixed height for the category */
+        }
+
+        .category img {
+            width: 100%; /* Make images responsive */
+            transition: transform 0.3s; /* Smooth scale effect */
+        }
+
+        .category p {
+            position: absolute; /* Position text absolutely within the category */
+            bottom: 0; /* Position at the bottom of the image */
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7); /* Background for better readability */
+            color: white; /* Text color */
+            padding: 10px; /* Some padding */
+            text-align: center; /* Center the text */
+            opacity: 0; /* Hide text initially */
+            transition: opacity 0.3s; /* Smooth transition for opacity */
+            height: 100%; /* Set height to fill the parent */
+            display: flex; /* Use flexbox to center text */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .category:hover img {
+            transform: scale(1.1); /* Slight zoom effect on hover */
+        }
+
+        .category:hover p {
+            opacity: 1; /* Show the text on hover */
+        }
+        header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.header-content a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+}
+.header-content a:hover {
+    color: #007bff;
+}
+.search .input-group {
+    width: 100%;
+}
+.search input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#cart {
+    font-size: xx-large;
+    color: #333;
+}
+    </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+     <!---=====header session ======= -->
+     <section class="header_menu" id="header_menu">
+        <header class="container-fluid">
+            <div class="header-content row">
+                <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-between align-items-center">
+                    <a href="main.html">Home</a>
+                    <a href="product.html">Product</a>
+                    <a href="category.html">Category</a>
+                    <a href="my_orders.html">my_orders</a>
+                    <a href="about_us.html">About Us</a>
+                    <a href="contact_us.html">Contact Us</a>
+                </div>
+                <div class="col-12 col-md-4 col-lg-5 mt-2 mt-md-0">
+                    <nav class="navbar navbar-light bg-light p-0">
+                        <form class="form-inline w-100">
+                            <div class="input-group w-100">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class='bx bx-search-alt'></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                            </div>
+                        </form>
+                    </nav>
+                </div>
+                <div class="col-12 col-md-2 col-lg-3 mt-2 mt-md-0 d-flex justify-content-end">
+                    <a href="cart.html"><i class='fa fa-shopping-cart' id="cart"></i></a>
+                </div>
+            </div>
+        </header>
+    </section>
+   
+    <!-- ==============products starts here============== -->
+    <section class="products py-5 my-5 bg-light" id="products">
+        <div class="container">
+            <div class="section_title text-center mb-5">
+                <h1 class="text-capitalize">Products by Category</h1>
+            </div>
+            <div class="row mb-5" id="product-list">
+                <!-- Example of Dress Category Products -->
+                <div class="col-md-4 col-12 single_product" data-category="dress">
+                    <div class="shadow text-center p-1">
+                        <div class="product_img">
+                            <a href="product_detail.html">
+                                <img src="https://m.media-amazon.com/images/I/71I-cik1CyL._AC_UL1500_.jpg" class="img img-fluid" alt="Green Dress with details">
+                            </a>
+                            <div class="new_product">
+                                <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                            </div>
+                        </div>
+                        <div class="product-caption my-3">
+                            <div class="product-ratting">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <h4><a href="product_detail.html">Green Dress with details</a></h4>
+                            <div class="price">
+                                <b><span class="mr-1">₹</span><span>400</span></b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more products in the same category -->
+                <!-- Example of Shirt Category Products -->
+                <div class="col-md-4 col-12 single_product" data-category="shirt">
+                    <div class="shadow text-center p-1">
+                        <div class="product_img">
+                            <a href="product_detail.html">
+                                <img src="https://image.dhgate.com/0x0s/f2-albu-g5-M01-AC-A5-rBVaI1jUiPiAN4EYAAYI1I6SONM348.jpg" class="img img-fluid" alt="Designer Shirt">
+                            </a>
+                            <div class="new_product">
+                                <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                            </div>
+                        </div>
+                        <div class="product-caption my-3">
+                            <div class="product-ratting">
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star low-star"></i>
+                                <i class="far fa-star low-star"></i>
+                            </div>
+                            <h4><a href="product_detail.html">Designer Shirt</a></h4>
+                            <div class="price">
+                                <b><span class="mr-1">₹</span><span>400</span></b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more products in the same category -->
+                <!-- Repeat for other categories like Accessories, Shoes, etc. -->
+            </div>
+        </div>
+    </section>
+    
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-5">
+            <h1 class="text-capitalize">Shop by Category</h1>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 category text-center">
+            <a href="product.html?category=dress">
+                <img src="https://www.shutterstock.com/image-photo/beautiful-colorful-clothes-flying-isolatedwomens-600nw-2257875171.jpg" alt="Clothes" class="img-fluid">
+                <p>Clothes</p>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 category text-center">
+            <a href="product.html?category=bags">
+                <img src="https://tse1.mm.bing.net/th?id=OIP.wppqeKuuxvEdk9w1Rs9fpQHaG6&pid=Api&P=0&h=180" alt="Bags" class="img-fluid">
+                <p>Bags</p>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 category text-center">
+            <a href="product.html?category=shoes">
+                <img src="https://i.pinimg.com/originals/8b/c5/71/8bc571e20209c3b662ce35e38d28cbb7.jpg" alt="Shoes" class="img-fluid">
+                <p>Shoes</p>
+            </a>
+        </div>
+    </div>
+    <!-- ==============products ends here============== -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Products</title>
+    <style>
+        * {
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.header-content a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+}
+.header-content a:hover {
+    color: #007bff;
+}
+.search .input-group {
+    width: 100%;
+}
+.search input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#cart {
+    font-size: xx-large;
+    color: #333;
+}
+        .products {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+        }
+
+        .section_title h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .single_product {
+            transition: transform 0.3s;
+            border-radius: 5px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px; /* Space between blocks */
+        }
+
+        .single_product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product_img img {
+            width: 100%;
+            height: 200px; /* Set a fixed height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .new_product .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+
+        .product-caption {
+            padding: 20px;
+        }
+
+        .product-ratting {
+            color: #f39c12; /* Star color */
+        }
+
+        .product-ratting i {
+            margin-right: 2px;
+        }
+
+        .product-caption h4 {
+            font-size: 1.25rem;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #28a745; /* Price color */
+        }
+
+        .filter-section {
+            margin-bottom: 30px;
+        }
+
+        .filter-title {
+            font-weight: bold;
+        }
+
+        .sorting-options {
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none; /* Hides products not in selected category */
+        }
+        .val{
+            text-decoration:line-through;
+            color: black;
+        }
+    </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIqZco5xZr9fRJ7zZZe0dfw5DZ1MqUQz4l7IvgiGUP/DA5w0JHp" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgP8LMg67vf8uM4P5PR5+7M5vxumPNA8+YzzmsQbi1Ju9FZf1gT" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <!---=====header session ======= -->
+        <section class="header_menu" id="header_menu">
+            <header class="container-fluid">
+                <div class="header-content row">
+                    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-between align-items-center">
+                        <a href="main.html">Home</a>
+                        <a href="product.html">Product</a>
+                        <a href="category.html">Category</a>
+                        <a href="my_orders.html">my_orders</a>
+                        <a href="about_us.html">About Us</a>
+                        <a href="contact_us.html">Contact Us</a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-5 mt-2 mt-md-0">
+                        <nav class="navbar navbar-light bg-light p-0">
+                            <form class="form-inline w-100">
+                                <div class="input-group w-100">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class='bx bx-search-alt'></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                                </div>
+                            </form>
+                        </nav>
+                    </div>
+                    <div class="col-12 col-md-2 col-lg-3 mt-2 mt-md-0 d-flex justify-content-end">
+                        <a href="cart.html"><i class='fa fa-shopping-cart' id="cart"></i></a>
+                    </div>
+                </div>
+            </header>
+        </section>
+        <!--===Header session closed===-->
+        <script>
+            // Load products from localStorage
+            let products = JSON.parse(localStorage.getItem('products')) || [];
+    
+            function displayProducts() {
+                const productList = document.getElementById('product-list');
+                productList.innerHTML = '';
+    
+                products.forEach(product => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    col.innerHTML = `
+                        <div class="card mb-4">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">Price: ₹${product.price}</p>
+                            </div>
+                        </div>
+                    `;
+                    productList.appendChild(col);
+                });
+            }
+    
+            // Initial display
+            displayProducts();
+        </script>
+    <!-- ==============products starts here============== -->
+    <section class="products py-5 my-5 bg-light" id="products">
+        <div class="container">
+            <div class="section_title text-center mb-5">
+                <h1 class="text-capitalize">Products</h1>
+            </div>
+            <div class="row mb-5">
+                <!-- Sidebar for Filters -->
+                <div class="col-md-3">
+                    <div class="filter-section">
+                        <h4 class="filter-title">Category</h4>
+                        <ul class="list-unstyled">
+                            <li><input type="radio" name="category" value="dress" onchange="filterProducts()"> Dresses</li>
+                            <li><input type="radio" name="category" value="shirt" onchange="filterProducts()"> Shirts</li>
+                            <li><input type="radio" name="category" value="accessory" onchange="filterProducts()"> Accessories</li>
+                            <li><input type="radio" name="category" value="shoes" onchange="filterProducts()"> Shoes</li>
+                            <li><input type="radio" name="category" value="all" onchange="filterProducts()" checked> All</li>
+                        </ul>
+                    </div>
+                    <div class="filter-section">
+                        <h4 class="filter-title">Price Range</h4>
+                        <ul class="list-unstyled">
+                            <li><input type="radio" name="price" value="0-200" onchange="filterProducts1()"> ₹0 - ₹200</li>
+                            <li><input type="radio" name="price" value="200-400" onchange="filterProducts1()"> ₹200 - ₹400</li>
+                            <li><input type="radio" name="price" value="400-600" onchange="filterProducts1()"> ₹400 - ₹600</li>
+                            <li><input type="radio" name="price" value="600-800" onchange="filterProducts1()"> ₹600 - ₹800</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="col-md-9">
+                    <div class="sorting-options">
+                        <label for="sorting">Sort by: </label>
+                        <select id="sorting">
+                            <option value="a-z">A to Z</option>
+                            <option value="most-rated">Most Rated</option>
+                            <option value="price-low-high">Price Low to High</option>
+                            <option value="price-high-low">Price High to Low</option>
+                        </select>
+                    </div>
+
+                    <div class="row mb-5" id="product-list">
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                
+                                <div class="product_img" >
+                                    <a href="product_detail.html?id=1">
+                                        <img src="https://m.media-amazon.com/images/I/71I-cik1CyL._AC_UL1500_.jpg" class="img img-fluid" alt="Green Dress with details">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=1">Green Dress with details</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>400</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="shirt">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=2">
+                                        <img src="https://image.dhgate.com/0x0s/f2-albu-g5-M01-AC-A5-rBVaI1jUiPiAN4EYAAYI1I6SONM348.jpg/fashion-designer-shirts-men-cotton-designer.jpg" class="img img-fluid" alt="Designer Shirt">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=2">Designer Shirt</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>400</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=3">
+                                        <img src="https://cdn.shopify.com/s/files/1/0118/6706/2330/products/QQ_20191224193515_1024x1024@2x.jpg?v=1577250600" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=3">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>699</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=4">
+                                        <img src="https://m.media-amazon.com/images/I/61qjpNu8flL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=4">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>359</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=5">
+                                        <img src="https://m.media-amazon.com/images/I/61xADFs7mbL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=5">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>389</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=6">
+                                        <img src="https://m.media-amazon.com/images/I/518n4wn7k6L._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=6">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>499</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=7">
+                                        <img src="https://m.media-amazon.com/images/I/91cAPJCQG8L._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=7">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>349</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=8">
+                                        <img src="https://m.media-amazon.com/images/I/61NloRw77IL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=8">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>599</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=9">
+                                        <img src="https://m.media-amazon.com/images/I/71jtkd3vr0L._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=9">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>379</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="dress">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=10">
+                                        <img src="https://m.media-amazon.com/images/I/41+sqwRmHiL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Stylish Dress">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=10">Stylish Dress</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>349</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="accessory">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=11">
+                                        <img src="https://m.media-amazon.com/images/I/71Moe9K82tL._AC_UL480_QL65_.jpg" class="img img-fluid" alt="Fashion Accessories">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=11">URBAN FOREST</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>499</span> M.R.P:<span class="val">₹2000</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="accessory">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=12">
+                                        <img src="https://m.media-amazon.com/images/I/81u280nPK2L._AC_UL480_QL65_.jpg" class="img img-fluid" alt="Fashion Accessories">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=12">WildHorn</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>479</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="accessory">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=13">
+                                        <img src="https://m.media-amazon.com/images/I/61QiBo-sPTL._AC_UY327_QL65_.jpg" class="img img-fluid" alt="Fashion Accessories">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=13">Noise Newly Launched Vortex Plus 1.46” AMOLED Display, AoD, BT Calling, Sleek Metal Finish, 7 Days Battery Life, All New OS with 100+ Watch Faces & Health Suite (Jet Black)</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>2199    </span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="accessory">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=14">
+                                        <img src="https://m.media-amazon.com/images/I/61YUxOoXWAL._AC_UY327_QL65_.jpg" class="img img-fluid" alt="Fashion Accessories">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=14">Noise Twist Round dial Smart Watch with Bluetooth Calling, 1.38" TFT Display, up-to 7 Days Battery, 100+ Watch Faces, IP68, Heart Rate Monitor, Sleep Tracking (Silver Grey)
+                                    </a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>1399</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="accessory">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=15">
+                                        <img src="https://m.media-amazon.com/images/I/81pKcweEF6L._AC_UY327_QL65_.jpg" class="img img-fluid" alt="Fashion Accessories">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star low-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html">Pebble Dome 1.52" Spherical Amoled Display, India's First 3D Spherical Display, Premium Metal Built, leather Strap, Wireless Charging (Whisky Brown)</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>2999</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="shoes">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=16">
+                                        <img src="https://m.media-amazon.com/images/I/61B4IdiAfyL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Casual Shoes">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=16">Casual Shoes</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>1999</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="shoes">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=17">
+                                        <img src="https://m.media-amazon.com/images/I/61wE1PW++7L._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Casual Shoes">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=17">Casual Shoes</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>599</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="shoes">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=18">
+                                        <img src="https://m.media-amazon.com/images/I/61X85FjPzwL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Casual Shoes">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=18">Casual Shoes</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>1800</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="shoes">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=19">
+                                        <img src="https://m.media-amazon.com/images/I/71gVtJPjZZL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Casual Shoes">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=19">Casual Shoes</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>750</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12 single_product" data-category="shoes">
+                            <div class="shadow text-center p-1">
+                                <div class="product_img">
+                                    <a href="product_detail.html?id=20">
+                                        <img src="https://m.media-amazon.com/images/I/61QhuBq7uhL._AC_UL480_FMwebp_QL65_.jpg" class="img img-fluid" alt="Casual Shoes">
+                                    </a>
+                                    <div class="new_product">
+                                        <span class="badge py-2 px-3 badge-pill badge-danger">New</span>
+                                    </div>
+                                </div>
+                                <div class="product-caption my-3">
+                                    <div class="product-ratting">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <h4><a href="product_detail.html?id=20">Casual Shoes</a></h4>
+                                    <div class="price">
+                                        <b><span class="mr-1">₹</span><span>1600</span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    
+    <!-- ==============products ends here============== -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function filterProducts() {
+            const selectedCategory = document.querySelector('input[name="category"]:checked').value;
+            const products = document.querySelectorAll('.single_product');
+
+            products.forEach(product => {
+                if (selectedCategory === 'all' || product.getAttribute('data-category') === selectedCategory) {
+                    product.classList.remove('hidden');
+                } else {
+                    product.classList.add('hidden');
+                }
+            });
+        }
+        window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    const products = document.querySelectorAll('.single_product');
+
+    if (category) {
+        
+        const radioButton = document.querySelector(`input[name="category"][value="${category}"]`);
+        if (radioButton) {
+            radioButton.checked = true; 
+        }
+
+        
+        products.forEach(product => {
+            if (product.getAttribute('data-category') === category) {
+                product.classList.remove('hidden'); 
+            } else {
+                product.classList.add('hidden'); 
+            }
+        });
+    } else {
+        
+        products.forEach(product => product.classList.remove('hidden'));
+    }
+}
+
+    </script>
+    <script>
+        function filterProducts1() {
+            const selectedPriceRange = document.querySelector('input[name="price"]:checked');
+            const productGrid = document.getElementById('productGrid');
+            const products = productGrid.getElementsByClassName('single_product');
+            
+            // Hide all products initially
+            for (let product of products) {
+                product.style.display = 'none';
+            }
+    
+            if (selectedPriceRange) {
+                const [minPrice, maxPrice] = selectedPriceRange.value.split('-').map(Number);
+    
+                // Show products that fall within the selected price range
+                for (let product of products) {
+                    const productPrice = parseInt(product.getAttribute('data-price'));
+                    if (productPrice >= minPrice && productPrice <= maxPrice) {
+                        product.style.display = 'block';
+                    }
+                }
+            } else {
+                // If no filter is selected, show all products
+                for (let product of products) {
+                    product.style.display = 'block';
+                }
+            }
+        }
+        
+    </script>
+    
+
+    
+</body>
+</html>

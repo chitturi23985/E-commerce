@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .cart-item img {
+            width: 100px;
+            height: auto;
+        }
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.header-content a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+}
+.header-content a:hover {
+    color: #007bff;
+}
+.search .input-group {
+    width: 100%;
+}
+.search input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#cart {
+    font-size: xx-large;
+    color: #333;
+}
+    </style>
+</head>
+<body>
+     <!---=====header session ======= -->
+     <section class="header_menu" id="header_menu">
+        <header class="container-fluid">
+            <div class="header-content row">
+                <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-between align-items-center">
+                    <a href="main.html">Home</a>
+                    <a href="product.html">Product</a>
+                    <a href="category.html">Category</a>
+                    <a href="about_us.html">About Us</a>
+                    <a href="contact_us.html">Contact Us</a>
+                </div>
+                <div class="col-12 col-md-4 col-lg-5 mt-2 mt-md-0">
+                    <nav class="navbar navbar-light bg-light p-0">
+                        <form class="form-inline w-100">
+                            <div class="input-group w-100">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class='bx bx-search-alt'></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                            </div>
+                        </form>
+                    </nav>
+                </div>
+                <div class="col-12 col-md-2 col-lg-3 mt-2 mt-md-0 d-flex justify-content-end">
+                    <a href="cart.html"><i class='fa fa-shopping-cart' id="cart"></i></a>
+                </div>
+            </div>
+        </header>
+    </section>
+    <section class="cart py-5 my-5" id="cart">
+        <div class="container">
+            <div class="section_title text-center mb-5">
+                <h1 class="text-capitalize">Shopping Cart</h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            <!-- Cart items will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-right">
+                    <p class="cart-total">Total: ₹<span id="cart-total">0</span></p>
+                    <a href="checkout.html"><button class="btn btn-primary">Proceed to Checkout</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Sample products array (normally this would come from your product data)
+        const products = [
+            { id: 1, name: "Green Dress with details", price: 400, image: "https://m.media-amazon.com/images/I/71I-cik1CyL._AC_UL1500_.jpg" },
+            { id: 2, name: "Designer Shirt", price: 400, image: "https://image.dhgate.com/0x0s/f2-albu-g5-M01-AC-A5-rBVaI1jUiPiAN4EYAAYI1I6SONM348.jpg/fashion-designer-shirts-men-cotton-designer.jpg" },
+            { id: 3, name: "Stylish Dress", price: 699, image: "https://cdn.shopify.com/s/files/1/0118/6706/2330/products/QQ_20191224193515_1024x1024@2x.jpg?v=1577250600" },
+            { id: 4, name: "Stylish Dress", price: 359, image: "https://m.media-amazon.com/images/I/61qjpNu8flL._AC_UL480_FMwebp_QL65_.jpg" }
+            ,{
+                id: 5,
+                category: "dress",
+                name: "Stylish Dress",
+                price: 389,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61xADFs7mbL._AC_UL480_FMwebp_QL65_.jpg",
+                related: [1, 4]
+            },
+            {
+                id: 6,
+                category: "dress",
+                name: "Stylish Dress",
+                price: 499,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/518n4wn7k6L._AC_UL480_FMwebp_QL65_.jpg",
+                related: [1, 4]
+            },
+            {
+                id: 7,
+                category: "dress",
+                name: "Stylish Dress",
+                price: 349,
+                rating: 3.5,
+                image: "https://m.media-amazon.com/images/I/91cAPJCQG8L._AC_UL480_FMwebp_QL65_.jpg",
+                related: [3, 4]
+            },{
+                id: 8,
+                category: "dress",
+                name: "Stylish Dress",
+                price: 599,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61NloRw77IL._AC_UL480_FMwebp_QL65_.jpg",
+                related: [4,5,6,7]
+            },{
+                id: 9,
+                category: "dress",
+                name: "Stylish Dress",
+                price: 379,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/71jtkd3vr0L._AC_UL480_FMwebp_QL65_.jpg",
+                related: [4,5,6,7,8]
+            },{
+                id: 10,
+                category: "dress",
+                name: "Stylish Dress",
+                price: 349,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/41+sqwRmHiL._AC_UL480_FMwebp_QL65_.jpg",
+                related: [3, 4,5,6,7,8,9]
+            },{
+                id: 11,
+                category: "accessory",
+                name: "URBAN FOREST",
+                price: 499,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/71Moe9K82tL._AC_UL480_QL65_.jpg",
+                related: [12]
+            },{
+                id: 12,
+                category: "accessory",
+                name: "WildHorn",
+                price: 479,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/81u280nPK2L._AC_UL480_QL65_.jpg",
+                related: [11]
+            },{
+                id: 13,
+                category: "accessory",
+                name: "Noise Newly Launched Vortex Plus 1.46” AMOLED Display, AoD, BT Calling, Sleek Metal Finish, 7 Days Battery Life, All New OS with 100+ Watch Faces & Health Suite (Jet Black)",
+                price: 2199,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61QiBo-sPTL._AC_UY327_QL65_.jpg",
+                related: [14,15]
+            },{
+                id: 14,
+                category: "accessory",
+                name: "Noise Twist Round dial Smart Watch with Bluetooth Calling, 1.38 TFT Display, up-to 7 Days Battery, 100+ Watch Faces, IP68, Heart Rate Monitor, Sleep Tracking (Silver Grey)",
+                price: 1399,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61YUxOoXWAL._AC_UY327_QL65_.jpg",
+                related: [13,15]
+            },{
+                id: 15,
+                category: "accessory",
+                name: "Pebble Dome 1.52 Spherical Amoled Display, India's First 3D Spherical Display, Premium Metal Built, leather Strap, Wireless Charging (Whisky Brown)",
+                price: 2999,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/81pKcweEF6L._AC_UY327_QL65_.jpg",
+                related: [13,14]
+            },{
+                id: 16,
+                category: "shoes",
+                name: "Casual Shoes",
+                price: 1999,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61B4IdiAfyL._AC_UL480_FMwebp_QL65_.jpg",
+                related: [17,18,19,20]
+            },{
+                id: 17,
+                category: "shoes",
+                name: "Casual Shoes",
+                price: 599,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61wE1PW++7L._AC_UL480_FMwebp_QL65_.jpg",
+                related: [16,18,19,20]
+            },{
+                id: 18,
+                category: "shoes",
+                name: "Casual Shoes",
+                price: 1800,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61X85FjPzwL._AC_UL480_FMwebp_QL65_.jpg",
+                related: [16,17,19,20]
+            },{
+                id: 19,
+                category: "shoes",
+                name: "Casual Shoes",
+                price: 750,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/71gVtJPjZZL._AC_UL480_FMwebp_QL65_.jpg",
+                related: [16,17,18,20]
+            },{
+                id: 20,
+                category: "shoes",
+                name: "Casual Shoes",
+                price: 1600,
+                rating: 4,
+                image: "https://m.media-amazon.com/images/I/61QhuBq7uhL._AC_UL480_FMwebp_QL65_.jpg",
+                related: [16,17,18,19]
+            }
+        ];
+
+        // Retrieve cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        localStorage.setItem('products', JSON.stringify(products));
+
+        function displayCartItems() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (product) {
+                    const itemTotal = product.price * item.quantity;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <div class="cart-item">
+                                <img src="${product.image}" alt="${product.name}">
+                                <span>${product.name}</span>
+                            </div>
+                        </td>
+                        <td>₹${product.price}</td>
+                        <td><input type="number" value="${item.quantity}" id="quantity-${product.id}" min="1"></td>
+                        <td>₹<span id="total-${product.id}">${itemTotal.toFixed(2)}</span></td>
+                        <td><button class="btn btn-danger btn-sm remove-item-btn" data-id="${product.id}">Remove</button></td>
+                    `;
+                    cartItems.appendChild(tr);
+
+                    const quantityInput = document.getElementById(`quantity-${product.id}`);
+                    quantityInput.addEventListener('input', () => {
+                        const quantity = parseInt(quantityInput.value) || 0;
+                        const newItemTotal = product.price * quantity;
+                        document.getElementById(`total-${product.id}`).textContent = newItemTotal.toFixed(2);
+
+                        total = Array.from(cartItems.getElementsByTagName('span')).reduce((acc, span) => {
+                            const spanValue = parseFloat(span.textContent.replace('₹', '').replace(',', '')) || 0;
+                            return acc + spanValue;
+                        }, 0);
+                        
+                        document.getElementById('cart-total').textContent = total.toFixed(2);
+                    });
+                } else {
+                    console.error(`Product with ID ${item.productId} not found.`);
+                }
+            });
+
+            total = Array.from(cartItems.getElementsByTagName('span')).reduce((acc, span) => {
+                const spanValue = parseFloat(span.textContent.replace('₹', '').replace(',', '')) || 0;
+                return acc + spanValue;
+            }, 0);
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+        }
+
+        function removeCartItem(productId) {
+            cart = cart.filter(item => item.productId !== productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
+        displayCartItems();
+
+        document.getElementById('cart-items').addEventListener('click', event => {
+            if (event.target.classList.contains('remove-item-btn')) {
+                const productId = parseInt(event.target.getAttribute('data-id'));
+                removeCartItem(productId);
+            }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

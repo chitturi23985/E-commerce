@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .header-content a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 10px;
+        }
+        .header-content a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="header_menu" id="header_menu">
+        <header class="container-fluid">
+            <div class="header-content row">
+                <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-between align-items-center">
+                    <a href="main.html">Home</a>
+                    <a href="product.html">Product</a>
+                    <a href="category.html">Category</a>
+                    <a href="my_orders.html">my_orders</a>
+                    <a href="about_us.html">About Us</a>
+                    <a href="contact_us.html">Contact Us</a>
+                </div>
+                <div class="col-12 col-md-4 col-lg-5 mt-2 mt-md-0">
+                    <nav class="navbar navbar-light bg-light p-0">
+                        <form class="form-inline w-100">
+                            <div class="input-group w-100">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class='bx bx-search-alt'></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                            </div>
+                        </form>
+                    </nav>
+                </div>
+                <div class="col-12 col-md-2 col-lg-3 mt-2 mt-md-0 d-flex justify-content-end">
+                    <a href="cart.html"><i class='fa fa-shopping-cart'></i></a>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    <!-- My Orders Section -->
+    <section class="my-orders py-5 my-5">
+        <div class="container">
+            <div class="section_title text-center mb-5">
+                <h1 class="text-capitalize">My Orders</h1>
+            </div>
+            <table class="table table-striped" id="orders-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Total</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Orders will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script>
+        function displayOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const ordersTable = document.getElementById('orders-table').querySelector('tbody');
+            ordersTable.innerHTML = '';
+
+            orders.forEach(order => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${order.date}</td>
+                    <td>${order.fullName}</td>
+                    <td>₹${order.total.toFixed(2)}</td>
+                    <td>
+                        <ul>
+                            ${order.items.map(item => `<li>${item.productId} (Quantity: ${item.quantity})</li>`).join('')}
+                        </ul>
+                    </td>
+                `;
+                ordersTable.appendChild(tr);
+            });
+        }
+
+        displayOrders();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

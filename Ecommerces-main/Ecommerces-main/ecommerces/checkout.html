@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .header-content a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 10px;
+        }
+        .header-content a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="header_menu" id="header_menu">
+        <header class="container-fluid">
+            <div class="header-content row">
+                <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-between align-items-center">
+                    <a href="main.html">Home</a>
+                    <a href="product.html">Product</a>
+                    <a href="category.html">Category</a>
+                    <a href="about_us.html">About Us</a>
+                    <a href="contact_us.html">Contact Us</a>
+                </div>
+                <div class="col-12 col-md-4 col-lg-5 mt-2 mt-md-0">
+                    <nav class="navbar navbar-light bg-light p-0">
+                        <form class="form-inline w-100">
+                            <div class="input-group w-100">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class='bx bx-search-alt'></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                            </div>
+                        </form>
+                    </nav>
+                </div>
+                <div class="col-12 col-md-2 col-lg-3 mt-2 mt-md-0 d-flex justify-content-end">
+                    <a href="cart.html"><i class='fa fa-shopping-cart'></i></a>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    <!-- Checkout Section -->
+    <section class="checkout py-5 my-5">
+        <div class="container">
+            <div class="section_title text-center mb-5">
+                <h1 class="text-capitalize">Checkout</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Billing Information</h3>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Shipping Address</label>
+                            <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="Enter your city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">Zip Code</label>
+                            <input type="text" class="form-control" id="zip" placeholder="Enter your zip code" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h3>Your Cart</h3>
+                    <table class="table table-striped" id="checkout-cart-items">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Cart items will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                    <p class="cart-total">Total: ₹<span id="checkout-cart-total">0</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function displayCheckoutCartItems() {
+            const checkoutCartItems = document.getElementById('checkout-cart-items').querySelector('tbody');
+            checkoutCartItems.innerHTML = '';
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (product) {
+                    const itemTotal = product.price * item.quantity;
+                    total += itemTotal;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${product.name}</td>
+                        <td>₹${product.price}</td>
+                        <td>${item.quantity}</td>
+                        <td>₹${itemTotal.toFixed(2)}</td>
+                    `;
+                    checkoutCartItems.appendChild(tr);
+                }
+            });
+
+            document.getElementById('checkout-cart-total').textContent = total.toFixed(2);
+        }
+
+        displayCheckoutCartItems();
+
+        // Handle form submission
+        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Save order details to local storage
+            const order = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                zip: document.getElementById('zip').value,
+                items: cart,
+                total: parseFloat(document.getElementById('checkout-cart-total').textContent),
+                date: new Date().toLocaleString()
+            };
+
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            alert('Order placed successfully! Thank you for your purchase.');
+            localStorage.removeItem('cart'); // Clear the cart after order placement
+            window.location.href = 'my_orders.html'; // Redirect to the My Orders page
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

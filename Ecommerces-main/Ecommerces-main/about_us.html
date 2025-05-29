@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.header-content a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+}
+.header-content a:hover {
+    color: #007bff;
+}
+.search .input-group {
+    width: 100%;
+}
+.search input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#cart {
+    font-size: xx-large;
+    color: #333;
+}
+        /* About Us Section Styles */
+        .about {
+            background-color: #f8f9fa; /* Light background color */
+        }
+
+        .section_title h1 {
+            font-size: 2.5rem; /* Larger font size for title */
+            color: #333; /* Darker text color */
+        }
+
+        .about .rounded img {
+            max-width: 80px; /* Ensure image is responsive */
+            height: auto; /* Maintain aspect ratio */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        .about_text p {
+            font-size: 1rem; /* Base font size for paragraphs */
+            color: #555; /* Medium gray text color */
+            line-height: 1.6; /* Improve readability */
+        }
+
+        .testimonial {
+            background-color: #fff; /* White background for testimonials */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Padding for spacing */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        .testimonial h4,
+        .testimonial h6 {
+            margin: 10px 0; /* Margin for headings */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5); /* Dark background for controls */
+            border-radius: 50%; /* Circular controls */
+        }
+
+        .card {
+            transition: transform 0.3s; /* Smooth transition */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        .border {
+            transition: border-color 0.3s; /* Smooth border color transition */
+        }
+
+        .border:hover {
+            border-color: #007bff; /* Change border color on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about {
+                padding: 20px; /* Reduce padding on smaller screens */
+            }
+
+            .about_text p {
+                font-size: 0.9rem; /* Smaller font size for mobile */
+            }
+
+            .section_title h1 {
+                font-size: 2rem; /* Smaller title on mobile */
+            }
+        }
+        
+    </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIqZco5xZr9fRJ7zZZe0dfw5DZ1MqUQz4l7IvgiGUP/DA5w0JHp" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgP8LMg67vf8uM4P5PR5+7M5vxumPNA8+YzzmsQbi1Ju9FZf1gT" crossorigin="anonymous"></script>
+</head>
+
+<body>
+        <!---=====header session ======= -->
+        <section class="header_menu" id="header_menu">
+            <header class="container-fluid">
+                <div class="header-content row">
+                    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-between align-items-center">
+                        <a href="main.html">Home</a>
+                        <a href="product.html">Product</a>
+                        <a href="category.html">Category</a>
+                        <a href="about_us.html">About Us</a>
+                        <a href="contact_us.html">Contact Us</a>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-5 mt-2 mt-md-0">
+                        <nav class="navbar navbar-light bg-light p-0">
+                            <form class="form-inline w-100">
+                                <div class="input-group w-100">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class='bx bx-search-alt'></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                                </div>
+                            </form>
+                        </nav>
+                    </div>
+                    <div class="col-12 col-md-2 col-lg-3 mt-2 mt-md-0 d-flex justify-content-end">
+                        <a href="cart.html"><i class='fa fa-shopping-cart' id="cart"></i></a>
+                    </div>
+                </div>
+            </header>
+        </section>
+        <!--===Header session closed===-->
+    
+    <!-- ==============about starts here============== -->
+    <section class="about py-5 my-5" id="about">
+        <div class="container">
+            <div class="section_title text-center mb-5">
+                <h1 class="text-capitalize">About Us</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="https://static.vecteezy.com/system/resources/previews/007/932/300/non_2x/about-us-button-about-us-text-template-for-website-about-us-icon-flat-style-vector.jpg" class="img img-fluid rounded shadow-lg" alt="about us image">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="title">
+                                <h3>Our Mission</h3>
+                            </div>
+                            <div class="about_text mt-sm-5">
+                                <p>
+                                    At our core, we believe in providing an exceptional online shopping experience. Our mission is to offer a carefully curated selection of high-quality products while ensuring outstanding customer service. We strive to innovate and adapt our offerings to meet the evolving needs of our customers.
+                                </p>
+                                <p>
+                                    We are committed to sustainability and ethical sourcing, promoting products that are beneficial to both our customers and the planet. By supporting local artisans and businesses, we aim to foster growth and development in our community.
+                                </p>
+                                <p>
+                                    Our goal is to create an inclusive platform that welcomes everyone, making shopping accessible and enjoyable for all. We are dedicated to making a positive impact on our community and providing a shopping experience that exceeds expectations.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+    
+                <!-- ==============testimonial starts here============== -->
+<section class="text-center bg-info my-5 py-5 rounded">
+    <div class="col-md-10 col-10 mx-auto">
+        <!-- Carousel Wrapper -->
+        <div id="carousel-example-1" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+            <!--Slides-->
+            <div class="carousel-inner">
+                <!--First slide-->
+                <div class="carousel-item active">
+                    <div class="testimonial">
+                        <!--Avatar-->
+                        <div class="avatar mx-auto mb-4">
+                            <img src="venky.jpg" class="rounded-circle img-fluid" alt="Venkateswarlu Banka">
+                        </div>
+                        <!--Content-->
+                        <p>
+                            <i class="fas fa-quote-left"></i> At our e-commerce platform, we prioritize quality and customer satisfaction above all. We are dedicated to providing a seamless shopping experience that keeps our customers coming back for more. 
+                        </p>
+                        <h4 class="font-weight-bold">Banka Venkateswarlu</h4>
+                        <h6 class="font-weight-bold my-3">Founder at Our E-commerce Company</h6>
+                        <!--Review-->
+                        <i class="fas fa-star blue-text"></i>
+                        <i class="fas fa-star blue-text"></i>
+                        <i class="fas fa-star blue-text"></i>
+                        <i class="fas fa-star blue-text"></i>
+                        <i class="fas fa-star-half-alt blue-text"></i>
+                    </div>
+                </div>
+                <!--First slide-->
+            </div>
+        </div>
+        <!-- Carousel Wrapper -->
+    </div>
+</section>
+<!-- ==============testimonial ends here============== -->
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-3 col-6">
+                    <div class="border border-dark rounded shadow text-center p-3">
+                        <div class="mb-4">
+                            <i class="far fa-credit-card fa-3x"></i>
+                        </div>
+                        <h5>Credit Card Support</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="border border-primary rounded shadow text-center p-3">
+                        <div class="mb-4">
+                            <i class="fas fa-laptop fa-3x"></i>
+                        </div>
+                        <h5>Online Order</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="border border-success rounded shadow text-center p-3">
+                        <div class="mb-4">
+                            <i class="fas fa-shipping-fast fa-3x"></i>
+                        </div>
+                        <h5>Fast Delivery</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="border border-danger rounded shadow text-center p-3">
+                        <div class="mb-4">
+                            <i class="fas fa-gifts fa-3x"></i>
+                        </div>
+                        <h5>Product with Gift</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==============about ends here============== -->
+</body>
+
+</html>
